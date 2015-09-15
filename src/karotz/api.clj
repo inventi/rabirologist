@@ -27,6 +27,11 @@
    (let [request-url (str "ears?left=" left "&right=" right)]
        (karotz-request karotz-ip request-url))))
 
-(defn say [karotz-ip media-url]
-  (let [escaped-url (st/replace (str "sound?url=" media-url) #" " "%20")]
-    (karotz-request karotz-ip escaped-url)))
+(defn- escape [text]
+  (-> text
+      (st/replace #"'" "%27")
+      (st/replace #" " "%20")))
+
+(defn say [karotz-ip text]
+  (karotz-request karotz-ip
+                  (str "tts?voice=graham&text=" (escape text))))
