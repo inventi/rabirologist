@@ -14,7 +14,9 @@
 
 (def api-routes
   (->
-    (routes (route/resources "/"))
+    (routes
+      (GET "/tellme" [name] name)
+      (route/resources "/"))
     (wrap-dir-index)))
 
 (def api (handler/api #'api-routes))
