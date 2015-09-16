@@ -8,7 +8,8 @@
             [compojure.handler :as handler]
             [ring.util.response :as resp]
             [karotz.api :as api]
-            [karotz.wisdom :as wisdom]))
+            [karotz.wisdom :as wisdom])
+  (:gen-class))
 
 (defn wrap-dir-index [handler]
   (fn [req]
