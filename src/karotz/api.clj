@@ -19,6 +19,14 @@
            (.log log Level/SEVERE "failed to send request to karotz" e))))
      url)))
 
+(defn leds
+  ([karotz-ip rgb speed]
+   (let [pulse (if (zero? speed) 0 1)]
+     (karotz-request karotz-ip
+                     (str "leds?pulse=" pulse "&speed=" speed "&color=" rgb))))
+  ([karotz-ip rgb]
+   (leds karotz-ip rgb 1 700)))
+
 (defn ears
   ([karotz-ip]
    (ears karotz-ip 5 3))
