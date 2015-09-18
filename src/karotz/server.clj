@@ -31,9 +31,10 @@
   (->
     (routes
       (GET "/tellme" [name]
-           (do
-             (tell "10.50.0.160" (wisdom/predict name))
-             (resp/redirect "/index.html")))
+           (let [media (str "http://10.50.0.110:60222/speak/daniel/")]
+             (do
+               (tell "10.50.0.160" (str media (wisdom/predict name)))
+               (resp/redirect "/index.html"))))
       (route/resources "/"))
     (wrap-dir-index)))
 

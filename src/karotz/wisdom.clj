@@ -20,7 +20,7 @@
   (mod (.hashCode (reverse (.toLowerCase s))) (count predictions)))
 
 (defn predict [person-name]
-  (str "Greetings " person-name
+  (str "Greetings " person-name ". "
        (predictions (prediction-index person-name))))
 
 

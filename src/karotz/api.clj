@@ -14,6 +14,7 @@
    (let [url  (str (karotz-api karot) "/" url)]
      (future
        (try
+         (.log log Level/INFO (str "send request --> " url))
          (slurp url)
          (catch Exception e
            (.log log Level/SEVERE "failed to send request to karotz" e))))
@@ -40,6 +41,6 @@
       (st/replace #"'" "%27")
       (st/replace #" " "%20")))
 
-(defn say [karotz-ip text]
-  (karotz-request karotz-ip
-                  (str "tts?voice=graham&text=" (escape text))))
+(defn say  [karotz-ip media-url]
+   (let  [escaped-url  (str  "sound?url=" (escape media-url))]
+        (karotz-request karotz-ip escaped-url)))
